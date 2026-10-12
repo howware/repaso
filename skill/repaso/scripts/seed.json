@@ -1,0 +1,37 @@
+{
+  "seed_version": "1",
+  "predicates": [
+    {"id": "topic_goal", "value_type": "text", "cardinality": "one", "label": "Goal", "description": "What the owner wants to learn this topic for, in their words"},
+    {"id": "topic_deadline", "value_type": "datetime", "cardinality": "one", "label": "Deadline", "description": "Date by which the owner wants to have seen every card of the topic, at noon local time"},
+    {"id": "topic_language", "value_type": "text", "cardinality": "one", "label": "Language", "description": "Language of the topic's cards, as the owner asked (e.g. es, en)"},
+    {"id": "topic_state", "value_type": "text", "cardinality": "one", "label": "Topic state", "description": "active, paused or archived"},
+    {"id": "in_topic", "value_type": "entity", "cardinality": "one", "label": "Topic", "description": "The topic a unit or a card belongs to"},
+    {"id": "unit_order", "value_type": "integer", "cardinality": "one", "label": "Order in the plan", "description": "Position of the unit in its topic's study plan, from 1"},
+    {"id": "unit_summary", "value_type": "text", "cardinality": "one", "label": "What the unit covers", "description": "What the unit of the plan is about, so its cards can be made when it comes up"},
+    {"id": "in_unit", "value_type": "entity", "cardinality": "one", "label": "Unit", "description": "The unit of the plan a card belongs to (none for cards from the conversation)"},
+    {"id": "card_question", "value_type": "text", "cardinality": "one", "label": "Question", "description": "What the agent asks"},
+    {"id": "card_answer", "value_type": "text", "cardinality": "one", "label": "Answer", "description": "What a good answer must contain, used to grade the owner's words"},
+    {"id": "card_origin", "value_type": "text", "cardinality": "one", "label": "Origin", "description": "conversation (the owner said it), material (from a text the owner gave) or plan (from the agent's knowledge, for a unit of the plan)"},
+    {"id": "card_source_text", "value_type": "text", "cardinality": "one", "label": "Where it came from", "description": "The owner's words, the title of the material or the unit, so a wrong card can be traced"},
+    {"id": "card_seq", "value_type": "integer", "cardinality": "one", "label": "Sequence", "description": "Order in which the card was added, so new cards are introduced in that order"},
+    {"id": "card_state", "value_type": "text", "cardinality": "one", "label": "Card state", "description": "active, paused or archived"},
+    {"id": "desired_retention_bp", "value_type": "integer", "unit": "basis_point", "cardinality": "one", "label": "Desired retention", "description": "Probability of remembering a card when it is asked, e.g. 9000 = 90%"},
+    {"id": "session_minutes", "value_type": "integer", "unit": "minute", "cardinality": "one", "label": "Session length", "description": "Minutes of a daily session"},
+    {"id": "new_per_day", "value_type": "integer", "cardinality": "one", "label": "New cards per day", "description": "Most cards seen for the first time in one day"},
+    {"id": "freezes_per_month", "value_type": "integer", "cardinality": "one", "label": "Streak freezes per month", "description": "Missed days per calendar month that do not break the streak"},
+    {"id": "rating", "value_type": "integer", "cardinality": "one", "label": "Rating", "description": "FSRS rating of a review: 1 again, 2 hard, 3 good, 4 easy"},
+    {"id": "attempt", "value_type": "integer", "cardinality": "one", "label": "Attempt", "description": "1 for the first time a card is asked that day, 2 when it is asked again after a miss"},
+    {"id": "answer_text", "value_type": "text", "cardinality": "one", "label": "The owner's answer", "description": "What the owner answered, in their words"},
+    {"id": "about_card", "value_type": "entity", "cardinality": "one", "label": "Card", "description": "The card a review or a reset is about"},
+    {"id": "reason_text", "value_type": "text", "cardinality": "one", "label": "Reason", "description": "Why something was changed, in the owner's words"}
+  ],
+  "entities": [
+    {"key": "settings:repaso", "type": "settings", "name": "repaso settings"}
+  ],
+  "vocabularies": {
+    "topic_state": ["active", "paused", "archived"],
+    "card_state": ["active", "paused", "archived"],
+    "card_origin": ["conversation", "material", "plan"]
+  },
+  "high_volume_event_types": ["card_reviewed"]
+}

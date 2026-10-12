@@ -1,0 +1,34 @@
+{
+  "howware": "0.2",
+  "name": "repaso",
+  "version": "0.1.0",
+  "description": "Learn and don't forget, without an app: your agent turns what you learn into cards, quizzes you a few minutes a day, grades your answers and schedules each review with FSRS.",
+  "license": "Apache-2.0",
+  "languages": ["en", "es"],
+  "hosts": ["claude-code"],
+  "skill": "skill/repaso",
+  "adapters": [
+    {"name": "project-memory", "version": ">=0.4.0", "url": "https://github.com/howware/long-term-memory-for-AI"}
+  ],
+  "tools": [{"name": "repaso.py", "network": false, "dependencies": []}],
+  "memory": {"kind": "local-sqlite", "append_only": true, "seed_version": "1"},
+  "privacy": {
+    "stays_local": [
+      "the memory file with topics, plans, cards, every review and the settings (the agent queries it and sees the answers)",
+      "material the owner keeps in the folder and does not share in the conversation"
+    ],
+    "agent_sees": [
+      "the cards: questions, answers and where each one came from",
+      "the owner's answers, which are stored with each review",
+      "the topics, their goals and deadlines, the study plans and the progress",
+      "everything the owner types or shares in the conversation"
+    ],
+    "cannot_guarantee": [
+      "what the agent sees leaves the computer for the AI provider, under its terms",
+      "cards made by the agent can be wrong, above all those from its own knowledge; each card records where it came from so it can be corrected",
+      "the grade of an answer is the agent's judgment, not a measurement",
+      "reminders happen only when the owner opens a conversation; there are no push notifications",
+      "the memory file is not encrypted"
+    ]
+  }
+}
