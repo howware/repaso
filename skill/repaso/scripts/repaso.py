@@ -179,7 +179,8 @@ class Memory:
             if proc.returncode == 0:
                 return json.loads(proc.stdout) if proc.stdout.strip() else None
             message = (proc.stderr or proc.stdout).strip()
-            if attempt == 1 and "at least one second" in message:
+            # The memory compares validity per second: a change to a fact in the second it began waits one.
+            if attempt == 1 and ("at least one second" in message or "is not after" in message):
                 time.sleep(1.1)
                 continue
             raise ToolError(f"memory {args[0]} failed: {message[-600:]}", MEMORY_ERROR)
